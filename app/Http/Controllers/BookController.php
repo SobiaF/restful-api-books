@@ -4,19 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class BookController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -25,7 +16,12 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Book::create($request->only([
+            'title', 'description', 'author', 'price'
+        ]));
+
+        $value = 'request has succeeded';
+        return response()->json([$value], 201);
     }
 
     /**
@@ -36,7 +32,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        return Book::all();
     }
 
     /**
@@ -48,7 +44,13 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        $book->update($request->only([
+            'title', 'description', 'author', 'price',
+        ]));
+
+
+        $value = 'request has succeeded';
+        return response()->json([$value], 201);
     }
 
     /**
@@ -59,6 +61,7 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

@@ -17,7 +17,7 @@ class BookController extends Controller
     public function store(Request $request)
     {
         Book::create($request->only([
-            'title', 'description', 'author', 'price'
+            'title', 'description', 'author', 'price',
         ]));
 
         $value = 'request has succeeded';
@@ -42,15 +42,20 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request)
     {
-        $book->update($request->only([
-            'title', 'description', 'author', 'price',
-        ]));
+        $book = Book::findOrFail($request->id);
 
+        if (($book->updateOrFail($request->only([
+                'title', 'description', 'author', 'price',
+            ]))) === false) {
+                return response(
+                    "Couldn't update the book with id" . $request->id,
+                    Response::HTTP_BAD_REQUEST
+                );
+            }
 
-        $value = 'request has succeeded';
-        return response()->json([$value], 201);
+            return response($book);
     }
 
     /**

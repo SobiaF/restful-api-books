@@ -18,4 +18,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/', 'BookController@show')->name('view.books');
+Route::get('/books', 'App\Http\Controllers\BookController@show')->name('view.books');
+Route::post('/add-book', 'App\Http\Controllers\BookController@store')->name('add.book');
+Route::put('/books/{id}', 'App\Http\Controllers\BookController@update')->name('update.book');

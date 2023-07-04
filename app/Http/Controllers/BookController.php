@@ -20,8 +20,8 @@ class BookController extends Controller
             'title', 'description', 'author', 'price',
         ]));
 
-        $value = 'Request has succeeded';
-        return response()->json([$value], 201);
+        $value = 'The book has now been added';
+        return response()->json([$value],  Response::HTTP_CREATED);
     }
 
     /**
@@ -30,9 +30,37 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book)
+    public function showAll(Book $book)
     {
         return Book::all();
+    }
+    
+    /**
+     * Display the specified resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Book  $book
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request, $id)
+    {
+        $book = Book::find($id);
+
+        if ($book === null) {
+            return response(
+            "Couldn't find the book with the id: " . $id,
+            Response::HTTP_NOT_FOUND
+            );
+        }
+
+        if ($book->find($id) === false) {
+            return response(
+                "Couldn't find the book with the id: " . $id,
+                Response::HTTP_BAD_REQUEST
+            );
+        }
+
+        return response($book, Response::HTTP_OK);
     }
 
     /**
@@ -55,7 +83,7 @@ class BookController extends Controller
                 );
             }
 
-            return response($book);
+            return response($book, Response::HTTP_OK);
     }
 
     /**

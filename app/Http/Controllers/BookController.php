@@ -20,7 +20,7 @@ class BookController extends Controller
             'title', 'description', 'author', 'price',
         ]));
 
-        $value = 'request has succeeded';
+        $value = 'Request has succeeded';
         return response()->json([$value], 201);
     }
 
@@ -50,7 +50,7 @@ class BookController extends Controller
                 'title', 'description', 'author', 'price',
             ]))) === false) {
                 return response(
-                    "Couldn't update the book with id" . $request->id,
+                    "Couldn't update the book with id: " . $request->id,
                     Response::HTTP_BAD_REQUEST
                 );
             }
@@ -61,12 +61,28 @@ class BookController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy(Request $request)
     {
-        $book->delete();
-        return response()->json(null, Response::HTTP_NO_CONTENT);
+        $book = Book::find($request->id);
+
+        if ($book === null) {
+            return response(
+            "Couldn't find the book with the id: " . $request->id,
+            Response::HTTP_NOT_FOUND
+            );
+        }
+
+        if ($book->delete() === false) {
+            return response(
+                "Couldn't delete the book with the id: " . $request->id,
+                Response::HTTP_BAD_REQUEST
+            );
+        }
+
+        return response(["id" => $request->id, "deleted" => true], Response::HTTP_OK);
     }
 }

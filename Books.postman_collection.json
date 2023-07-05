@@ -1,0 +1,73 @@
+
+	[{
+			"name": "GET books",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:8000/api/books"
+			},
+			"response": []
+		},
+		{
+			"name": "GET a book",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:8000/api/books/2"
+			},
+			"response": []
+		},
+		{
+			"name": "POST a book",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "        {\n            \"title\": \"Steve Jobs by Waater Isaacson: The Exclusive Biography\",\n            \"description\": \"Walter Isaacson tells the story of the rollercoaster life and searingly intense personality of creative entrepreneur whose passion for perfection and ferocious drive revolutionized six industries: personal computers, animated movies,music, phones, tablet computing, and digital publishing.\",\n            \"author\": \"Walter Isaacson\",\n            \"price\": 9\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8000/api/book"
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE a book",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": 1,\n        \"title\": \"The Little Prince\",\n        \"author\": \"Antoine de Saint-Exupéry\",\n        \"description\": \"The story follows a young prince who visits various planets, including Earth, and addresses themes of loneliness, friendship, love, and loss.\",\n        \"price\": 8,\n        \"created_at\": \"2023-07-04T13:38:55.000000Z\",\n        \"updated_at\": \"2023-07-04T13:38:55.000000Z\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8000/api/update-book"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Book",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://127.0.0.1:8000/api/books/7"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Book Copy",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://127.0.0.1:8000/api/books/7"
+			},
+			"response": []
+			}]

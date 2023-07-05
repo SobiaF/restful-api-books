@@ -35,7 +35,7 @@
 			"response": []
 		},
 		{
-			"name": "DELETE Book",
+			"name": "DELETE a Book",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -44,7 +44,7 @@
 			"response": []
 		},
 		{
-			"name": "Update a book",
+			"name": "UPDATE a book",
 			"request": {
 				"method": "PUT",
 				"header": [],

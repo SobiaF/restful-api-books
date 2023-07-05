@@ -90,8 +90,8 @@ class BookController extends Controller
     {
         try {
         $book = Book::findOrFail($request->id);
-    } catch(\Exception $e) {
-        return response()->json('Unable to update book, please try again later', 500);
+        } catch(\Exception $e) {
+            return response()->json('Unable to update book, please try again later', 500);
         }
 
         if (($book->updateOrFail($request->only([
@@ -101,9 +101,9 @@ class BookController extends Controller
                     "Couldn't update the book with id: " . $request->id,
                     Response::HTTP_BAD_REQUEST
                 );
-            }
+        }
 
-            return response($book, Response::HTTP_OK);
+        return response($book, Response::HTTP_OK);
     }
 
     /**
@@ -117,14 +117,14 @@ class BookController extends Controller
     {
         try {
         $book = Book::find($request->id);
-    } catch(\Exception $e) {
-        return response()->json('Unable to delete book from the database, please try again later', 500);
+        } catch(\Exception $e) {
+            return response()->json('Unable to delete book from the database, please try again later', 500);
         }
 
         if ($book === null) {
             return response(
-            "Couldn't find the book with the id: " . $request->id,
-            Response::HTTP_NOT_FOUND
+                "Couldn't find the book with the id: " . $request->id,
+                Response::HTTP_NOT_FOUND
             );
         }
 
@@ -135,6 +135,6 @@ class BookController extends Controller
             );
         }
 
-            return response(["id" => $request->id, "deleted" => true], Response::HTTP_OK);
+        return response(["id" => $request->id, "deleted" => true], Response::HTTP_OK);
     }
 }

@@ -10,23 +10,26 @@ Returns a JSON string of books (option for all books, and a single book by using
 `GET /books/{id}`
 ### POST a book
 `POST /add-book`
-
 ## JSON example:
+```   
         {
             "title": "Steve Jobs by Waater Isaacson: The Exclusive Biography",
             "description": "Walter Isaacson tells the story of the rollercoaster life and searingly intense personality of creative entrepreneur whose passion for perfection and ferocious drive revolutionized six industries: personal computers, animated movies,music, phones, tablet computing, and digital publishing.",
             "author": "Walter Isaacson",
             "price": 9
         }
+```   
 ### UPDATE a book
 `PUT /books/{id}`
 ## JSON example:
+```     
         {
-        "title": "The Little Prince",
-        "author": "Antoine de Saint-Exupéry",
-        "description": "The story follows a young prince who visits various planets, including Earth, and addresses themes of loneliness, friendship, love, and loss.",
-        "price": 8
-        }
+            "title": "The Little Prince",
+            "author": "Antoine de Saint-Exupéry",
+            "description": "The story follows a young prince who visits various planets, including Earth, and addresses themes of loneliness, friendship, love, and loss.",
+            "price": 8
+       }
+ ```
 ### DELETE a book
 `DELETE /books/{id}`
 

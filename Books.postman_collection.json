@@ -1,5 +1,4 @@
-
-	[{
+[{
 			"name": "GET books",
 			"request": {
 				"method": "GET",
@@ -13,7 +12,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "http://127.0.0.1:8000/api/books/2"
+				"url": "http://127.0.0.1:8000/api/books/1"
 			},
 			"response": []
 		},
@@ -36,24 +35,6 @@
 			"response": []
 		},
 		{
-			"name": "UPDATE a book",
-			"request": {
-				"method": "PATCH",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "    {\n        \"id\": 1,\n        \"title\": \"The Little Prince\",\n        \"author\": \"Antoine de Saint-Exupéry\",\n        \"description\": \"The story follows a young prince who visits various planets, including Earth, and addresses themes of loneliness, friendship, love, and loss.\",\n        \"price\": 8,\n        \"created_at\": \"2023-07-04T13:38:55.000000Z\",\n        \"updated_at\": \"2023-07-04T13:38:55.000000Z\"\n    }",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "http://127.0.0.1:8000/api/update-book"
-			},
-			"response": []
-		},
-		{
 			"name": "DELETE Book",
 			"request": {
 				"method": "DELETE",
@@ -63,11 +44,20 @@
 			"response": []
 		},
 		{
-			"name": "DELETE Book Copy",
+			"name": "Update a book",
 			"request": {
-				"method": "DELETE",
+				"method": "PUT",
 				"header": [],
-				"url": "http://127.0.0.1:8000/api/books/7"
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 3,\n    \"title\": \"Orange: The Complete Collection, Vol. 1\",\n    \"author\": \"Ichigo Takano\",\n    \"description\": \"When sixteen-year-old Takamiya Naho receives a mysterious letter, claiming to be from her twenty-seven-year-old self, her life is suddenly thrown into flux. The letter informs her that a new transfer student by the name of Naruse Kakeru will be joining her class, and to keep her eye on him. What is Naho to make of the letter's contents and its cryptic warning\",\n    \"price\": 14,\n    \"created_at\": \"2023-07-04T13:53:29.000000Z\",\n    \"updated_at\": \"2023-07-04T13:53:29.000000Z\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8000/api/books/3"
 			},
 			"response": []
 			}]

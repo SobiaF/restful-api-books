@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -39,7 +40,11 @@ class BookController extends Controller
      */
     public function showAll(Book $book)
     {
-        return Book::all();
+        try {
+            return Book::all();
+        } catch(\Exception $e) {
+            return response()->json('Unable to show books from the database, please try again later', 500);
+        }
     }
     
     /**
@@ -51,7 +56,11 @@ class BookController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $book = Book::find($id);
+        try {
+            $book = Book::find($id);
+        } catch(\Exception $e) {
+            return response()->json('Unable to show book from the database, please try again later', 500);
+        }
 
         if ($book === null) {
             return response(
@@ -67,7 +76,7 @@ class BookController extends Controller
             );
         }
 
-        return response($book, Response::HTTP_OK);
+            return response($book, Response::HTTP_OK);    
     }
 
     /**
@@ -79,7 +88,11 @@ class BookController extends Controller
      */
     public function update(Request $request)
     {
+        try {
         $book = Book::findOrFail($request->id);
+    } catch(\Exception $e) {
+        return response()->json('Unable to update book, please try again later', 500);
+        }
 
         if (($book->updateOrFail($request->only([
                 'title', 'description', 'author', 'price',
@@ -102,7 +115,11 @@ class BookController extends Controller
      */
     public function destroy(Request $request)
     {
+        try {
         $book = Book::find($request->id);
+    } catch(\Exception $e) {
+        return response()->json('Unable to delete book from the database, please try again later', 500);
+        }
 
         if ($book === null) {
             return response(
@@ -118,6 +135,6 @@ class BookController extends Controller
             );
         }
 
-        return response(["id" => $request->id, "deleted" => true], Response::HTTP_OK);
+            return response(["id" => $request->id, "deleted" => true], Response::HTTP_OK);
     }
 }

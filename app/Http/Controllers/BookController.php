@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -16,9 +17,15 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        Book::create($request->only([
-            'title', 'description', 'author', 'price',
-        ]));
+        try {
+            Book::create($request->only([
+                'title', 'description', 'author', 'price',
+            ]));
+        } catch(QueryException $e) {
+            return response()->json('Unable to store book in database, please try again later', 500);
+        } catch(\Exception $e) {
+            return response()->json($e->getMessage(), 500);
+        }
 
         $value = 'The book has now been added';
         return response()->json([$value],  Response::HTTP_CREATED);
